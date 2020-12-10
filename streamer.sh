@@ -3,7 +3,7 @@
 source ~/.config/twitch.key
 
 QUEUE="queue leaky=downstream"
-CAPS="videorate ! video/x-raw, framerate=30/1 ! videoconvert"
+CAPS="videorate ! video/x-raw, framerate=20/1 ! videoconvert"
 MIXER="videomixer name=vmix"
 ENCODER=(
   x264enc
@@ -13,7 +13,7 @@ ENCODER=(
   tune=zerolatency # rtmpsink crashes due to SIGPIPE if there is latency
 )
 MUXER="flvmux streamable=true"
-SINK="rtmpsink location=rtmp://live.justin.tv/app/$KEY"
+SINK="rtmpsink location=rtmp://live-syd.twitch.tv/app/$KEY"
 
 APPEND=""
 
@@ -40,4 +40,8 @@ function webcam {
 source <(cat)
 
 PIPELINE="$MIXER ! $CAPS ! $QUEUE ! ${ENCODER[@]} ! $MUXER ! $QUEUE ! $SINK $APPEND"
-exec gst-launch-1.0 $PIPELINE
+
+echo 
+echo $PIPELINE
+echo
+exec gst-launch-1.0 -v $PIPELINE
