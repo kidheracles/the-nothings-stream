@@ -1,4 +1,3 @@
-# The Nothings Stream
 ### After [the Nothings Suite](https://pippinbarr.github.io/the-nothings-suite/)
 
 _Nothing to see here! Nothing to entertain you, make you laugh._
